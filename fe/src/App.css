@@ -1,0 +1,121 @@
+
+.App {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+}
+
+.Job,
+.SingleJob {
+  border: 1px solid white;
+  list-style: none;
+  padding: 0 10px;
+  margin: -1px 0;
+}
+
+.SingleJob {
+  width: 700px;
+}
+
+.Job a,
+.SingleJob a {
+  text-decoration: none;
+}
+
+.JobList {
+  width: 80%;
+}
+
+a {
+  color: #61dafb;
+}
+
+
+@media only screen and (min-width: 970px) {
+  .JobList {
+    width: 30%;
+  }
+}
+
+.New {
+  float: left;
+}
+
+.Navigation {
+  margin: 10px 0;
+  font-size: 24px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  align-content: space-around;
+  width: 20%;
+}
+
+.Navigation a {
+  text-decoration: none;
+  background-color: #61dafb;
+  color: #282c34;
+  text-align: center;
+  padding: 10px;
+}
+
+label {
+  display: block;
+  margin: 10px 0;
+}
+
+input[type=text], 
+input[type=submit],
+textarea {
+  display: block;
+  resize: none;
+}
+
+input[type=checkbox] {
+  vertical-align: sub;
+}
+
+/* From https://loading.io/css */
+.LoadingSpinner {
+  display: inline-block;
+  position: relative;
+  width: 64px;
+  height: 64px;
+}
+
+.LoadingSpinner div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 51px;
+  height: 51px;
+  margin: 6px;
+  border: 6px solid #cef;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #cef transparent transparent transparent;
+}
+
+.LoadingSpinner div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+
+.LoadingSpinner div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+
+.LoadingSpinner div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
