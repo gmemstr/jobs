@@ -107,11 +107,34 @@ class JobPage extends Component {
 }
 
 class Post extends Component {
+  constructor() {
+    super();
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.state = {
+      response: {},
+      loading: false,
+    };
+  }
+
+  handleSubmit(event) {
+    this.setState({ loading: true });
+    event.preventDefault();
+    const data = new FormData(event.target);
+
+    fetch('https://jobsapi.gmem.ca', {
+      method: 'POST',
+      body: data,
+    })
+    .then(response => response.json())
+    .then(data => this.setState({ response: data }));
+  }
+
   render() {
     return (
       <div className="App">
+        <PostStatus status={this.response} loading={this.loading} />
         <h2>Post new job</h2>
-        <form action="https://jobsapi.gmem.ca" method="POST">
+        <form onSubmit={this.handleSubmit}>
           <label>Position
           <input name="position" id="position" type="text" />
           </label>
@@ -134,6 +157,21 @@ class Post extends Component {
         </form>
       </div>
     );
+  }
+}
+
+class PostStatus extends Component {
+ render() {
+    if (this.props.loading) {
+      return <div className="LoadingSpinner"><div></div><div></div><div></div><div></div></div>; 
+    }
+    if (this.props.response.status === "error") {
+      return <div className="StatusBanner"><p>Could not submit job posting, try again later - {this.props.response.message}</p></div>; 
+    }
+    if (this.props.response.status === "success") {
+      return <div className="StatusBanner"><p>Submitted! <Link to={`job/${this.props.response.message}`}>View now</Link></p></div>;  
+    }
+    return <div className="StatusBanner"></div>;
   }
 }
 
